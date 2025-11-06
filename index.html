@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone Lockbox Timer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="title">UmbiliBox</h1>
+                <p class="subtitle">Track your digital detox sessions</p>
+            </div>
+            <button id="bluetoothBtn" class="bluetooth-btn">
+                <span class="bluetooth-icon">📡</span>
+                <span id="bluetoothStatus">Connect Device</span>
+            </button>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Connection Status Alert -->
+            <div id="statusAlert" class="alert hidden">
+                <span id="statusMessage"></span>
+            </div>
+
+            <!-- Active Session Section -->
+            <section id="activeSessionSection" class="section active-session hidden">
+                <div class="card">
+                    <h2 class="card-title">Active Session</h2>
+                    <div class="timer-display">
+                        <div id="timerValue" class="timer-value">00:00:00</div>
+                        <p class="timer-label">Session Duration</p>
+                    </div>
+                    <div class="session-info">
+                        <div class="info-item">
+                            <span class="info-label">Started</span>
+                            <span id="sessionStart" class="info-value">--:--</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Status</span>
+                            <span id="sessionStatus" class="info-value status-active">Active</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bluetooth Connection UI -->
+            <section id="connectionSection" class="section connection-section">
+                <div class="card">
+                    <h2 class="card-title">Device Connection</h2>
+                    <p class="card-description">Connect to your Arduino lockbox device via Bluetooth</p>
+                    
+                    <div id="deviceList" class="device-list hidden">
+                        <p class="device-list-label">Paired Devices:</p>
+                        <div id="pairedDevices" class="paired-devices"></div>
+                    </div>
+
+                    <div class="connection-actions">
+                        <button id="scanBtn" class="btn btn-primary">Scan for Devices</button>
+                        <button id="disconnectBtn" class="btn btn-secondary hidden">Disconnect</button>
+                    </div>
+
+                    <div id="connectionStatus" class="connection-status">
+                        <p class="status-text">No device connected</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Statistics Section -->
+            <section class="section statistics-section">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalSessions">0</div>
+                        <div class="stat-label">Total Sessions</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalTime">0h</div>
+                        <div class="stat-label">Total Time</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="avgSession">0m</div>
+                        <div class="stat-label">Average Session</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="longestSession">0m</div>
+                        <div class="stat-label">Longest Session</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sessions History -->
+            <section class="section history-section">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Session History</h2>
+                        <button id="clearHistoryBtn" class="btn btn-small btn-danger">Clear All</button>
+                    </div>
+                    
+                    <div id="sessionsContainer" class="sessions-container">
+                        <div class="empty-state">
+                            <p class="empty-text">No sessions yet. Start your first session!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="db.js"></script>
+    <script src="bluetooth.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
