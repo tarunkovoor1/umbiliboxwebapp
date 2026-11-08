@@ -18,7 +18,7 @@ async function initApp() {
   try {
     // Initialize database
     await database.init()
-    console.log("[v0] Database initialized")
+    console.log("[UmbiliBox] Database initialized")
 
     // Setup event listeners
     setupEventListeners()
@@ -34,7 +34,7 @@ async function initApp() {
       showAlert("Bluetooth is not supported in your browser. Please use Chrome or Edge.", "error")
     }
   } catch (error) {
-    console.error("[v0] Init error:", error)
+    console.error("[UmbiliBox] Init error:", error)
     showAlert("Failed to initialize app: " + error.message, "error")
   }
 }
@@ -128,7 +128,7 @@ async function handleSessionComplete(data) {
       status: "completed",
     }
 
-    console.log("[v0] Session complete:", session)
+    console.log("[UmbiliBox] Session complete:", session)
 
     // Save to database
     await database.addSession(session)
@@ -146,7 +146,7 @@ async function handleSessionComplete(data) {
       activeSession = null
     }
   } catch (error) {
-    console.error("[v0] Error saving session:", error)
+    console.error("[UmbiliBox] Error saving session:", error)
     showAlert("Failed to save session: " + error.message, "error")
   }
 }
@@ -183,7 +183,7 @@ async function loadSessions() {
       )
       .join("")
   } catch (error) {
-    console.error("[v0] Error loading sessions:", error)
+    console.error("[UmbiliBox] Error loading sessions:", error)
   }
 }
 
@@ -199,7 +199,7 @@ async function updateStatistics() {
     document.getElementById("avgSession").textContent = formatDuration(stats.averageTime)
     document.getElementById("longestSession").textContent = formatDuration(stats.longestSession)
   } catch (error) {
-    console.error("[v0] Error updating statistics:", error)
+    console.error("[UmbiliBox] Error updating statistics:", error)
   }
 }
 

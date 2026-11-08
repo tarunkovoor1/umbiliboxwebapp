@@ -25,11 +25,11 @@ class BluetoothManager {
         optionalServices: ["0000ffe0-0000-1000-8000-00805f9b34fb"],
       })
 
-      console.log("[v0] Device selected:", this.device.name)
+      console.log("[UmbiliBox] Device selected:", this.device.name)
 
       // Connect to GATT server
       this.server = await this.device.gatt.connect()
-      console.log("[v0] GATT server connected")
+      console.log("[UmbiliBox] GATT server connected")
 
       // Get service and characteristic
       const service = await this.server.getPrimaryService("0000ffe0-0000-1000-8000-00805f9b34fb")
@@ -44,11 +44,11 @@ class BluetoothManager {
 
       this.isConnected = true
       this.notifyListeners("connected", this.device.name)
-      console.log("[v0] Bluetooth connected successfully")
+      console.log("[UmbiliBox] Bluetooth connected successfully")
 
       return true
     } catch (error) {
-      console.error("[v0] Connection error:", error)
+      console.error("[UmbiliBox] Connection error:", error)
       this.notifyListeners("error", error.message)
       return false
     }
@@ -62,7 +62,7 @@ class BluetoothManager {
     const decoder = new TextDecoder()
     const data = decoder.decode(value)
 
-    console.log("[v0] Received data:", data)
+    console.log("[UmbiliBox] Received data:", data)
 
     try {
       // Parse incoming data (JSON format expected from Arduino)
@@ -71,7 +71,7 @@ class BluetoothManager {
         this.notifyListeners("sessionComplete", parsedData)
       }
     } catch (e) {
-      console.warn("[v0] Could not parse incoming data:", data)
+      console.warn("[UmbiliBox] Could not parse incoming data:", data)
     }
   }
 
@@ -87,9 +87,9 @@ class BluetoothManager {
       const encoder = new TextEncoder()
       const encoded = encoder.encode(JSON.stringify(data))
       await this.characteristic.writeValue(encoded)
-      console.log("[v0] Data sent:", data)
+      console.log("[UmbiliBox] Data sent:", data)
     } catch (error) {
-      console.error("[v0] Send error:", error)
+      console.error("[UmbiliBox] Send error:", error)
       throw error
     }
   }
@@ -102,7 +102,7 @@ class BluetoothManager {
       this.device.gatt.disconnect()
       this.isConnected = false
       this.notifyListeners("disconnected")
-      console.log("[v0] Bluetooth disconnected")
+      console.log("[UmbiliBox] Bluetooth disconnected")
     }
   }
 
